@@ -14,27 +14,29 @@ public class Basic_Caluclator {
         Stack<Integer> stack=new Stack<Integer>();
         int current=0;
         char operation='+';
-        for(int i=0;i<len;i++){
-            char ch=Str.charAt(i);
-            if(Character.isDigit(ch)){
-                current=(current*10)+(ch-'0');
+        for(int i=0;i<len;i++) {
+            char ch = Str.charAt(i);
+            if (Character.isDigit(ch)) {
+                current = (current * 10) + (ch - '0');
             }
 
             if (!Character.isDigit(ch) &&
                     !Character.isWhitespace(ch) || i == len - 1) {
-                if(operation=='-'){
-                    stack.push(-current);
-                }else if(operation=='+'){
-                    stack.push(current);
-                }else if(operation=='*'){
-                    int h=stack.pop();
-                    stack.push(h*current);
-                }else if(operation=='/'){
-                    int u=stack.pop();
-                    stack.push(u/current);
+                if (ch != ')' && ch != '(') {
+                    if (operation == '-') {
+                        stack.push(-current);
+                    } else if (operation == '+') {
+                        stack.push(current);
+                    } else if (operation == '*') {
+                        int h = stack.pop();
+                        stack.push(h * current);
+                    } else if (operation == '/') {
+                        int u = stack.pop();
+                        stack.push(u / current);
+                    }
+                    operation = ch;
+                    current = 0;
                 }
-                operation=ch;
-                current=0;
             }
         }
         int result=0;
